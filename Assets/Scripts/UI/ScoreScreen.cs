@@ -10,6 +10,8 @@ public class ScoreScreen : MonoBehaviour
     public GameObject defeatDisplay;
     public void EndGame(bool victory = false)
     {
+        Game.Instance.active = false;
+        Time.timeScale = 0;
         gameObject.SetActive(true);
         victoryDisplay.gameObject.SetActive(victory);
         defeatDisplay.gameObject.SetActive(!victory);

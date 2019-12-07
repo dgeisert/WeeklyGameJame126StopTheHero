@@ -29,7 +29,6 @@ public class Game : MonoBehaviour
         }
     }
     public float score;
-    int step = 3;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +36,7 @@ public class Game : MonoBehaviour
         pauseMenu.gameObject.SetActive(false);
         scoreScreen.gameObject.SetActive(false);
         inGameUI.gameObject.SetActive(true);
+        Score = 0;
     }
 
     // Update is called once per frame
@@ -48,7 +48,6 @@ public class Game : MonoBehaviour
             {
                 Pause();
             }
-            Score += Time.deltaTime * Random.value * 100;
         }
     }
 
@@ -57,17 +56,10 @@ public class Game : MonoBehaviour
         pauseMenu.gameObject.SetActive(!pauseMenu.gameObject.activeSelf);
     }
 
-    void Next()
+    public void GameOver(bool victory = false)
     {
-        if (step > 0)
-        {
-            step--;
-            if (step == 0)
-            {
-                inGameUI.EndGame(true);
-                scoreScreen.EndGame(true);
-                pauseMenu.gameObject.SetActive(false);
-            }
-        }
+        inGameUI.EndGame(victory);
+        scoreScreen.EndGame(victory);
+        pauseMenu.gameObject.SetActive(false);
     }
 }

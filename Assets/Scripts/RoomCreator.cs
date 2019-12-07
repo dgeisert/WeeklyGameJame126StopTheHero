@@ -30,6 +30,14 @@ public class RoomCreator : MonoBehaviour
             size = setSize;
             CreateRoom();
         }
+        if (StripForBuild.Strip)
+        {
+            CreateRoom();
+        }
+        else if (transform.childCount == 0)
+        {
+            CreateRoom();
+        }
     }
 
     void CreateRoom()
@@ -44,6 +52,10 @@ public class RoomCreator : MonoBehaviour
             {
                 DestroyImmediate(transform.GetChild(i).gameObject);
             }
+        }
+        if (StripForBuild.Strip)
+        {
+            return;
         }
         MeshDivider newFloor = Instantiate(floor, transform.position, Quaternion.identity, transform);
         newFloor.transform.position = transform.position;
@@ -112,6 +124,11 @@ public class RoomCreator : MonoBehaviour
         {
             CreateWall(left.x, -Vector3.forward * (size.y / 2 - left.x / 2) - Vector3.right * size.x / 2, -90);
             CreateWall(size.y - left.x - left.y, -Vector3.forward * (size.y / 2 - (left.x + left.y) - (size.y - left.x - left.y) / 2) - Vector3.right * size.x / 2, -90);
+        }
+        RoomSpawns rs = GetComponent<RoomSpawns>();
+        if (rs != null)
+        {
+            rs.Setup(this);
         }
     }
 

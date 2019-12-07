@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Char : MonoBehaviour
 {
+    public static Char Instance;
     public InGameUI gameUI;
     public float speed;
+    public float health = 5;
     int layerMask = 1 << 8;
 
     public float mana;
@@ -13,7 +15,12 @@ public class Char : MonoBehaviour
     public float recharge;
     public float waitRecharge;
     float lastManaSpend;
-    public float altCost;
+
+    public Transform projectileSpawnPoint;
+
+    public Projectile primaryProjectile;
+
+    public Projectile altProjectile;
 
     bool dash = false;
     public float dashCost;
@@ -25,12 +32,17 @@ public class Char : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        Instance = this;
+        gameUI.UpdateMana(mana, manaMax);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!Game.Instance.active)
+        {
+            return;
+        }
         //Player movement
         if (Controls.Forward && !Controls.Back)
         {
@@ -65,6 +77,14 @@ public class Char : MonoBehaviour
         {
             Dash();
         }
+        if (Controls.Shoot)
+        {
+            Shoot(primaryProjectile);
+        }
+        if (Controls.AltShoot)
+        {
+            Shoot(altProjectile);
+        }
 
         //Player recharge and deactivations
         if (lastDash + dashDuration < Time.time)
@@ -73,14 +93,7 @@ public class Char : MonoBehaviour
         }
         if (lastManaSpend + waitRecharge < Time.time && mana < manaMax)
         {
-            if (mana + recharge * Time.deltaTime > manaMax)
-            {
-                UpdateMana(manaMax - mana);
-            }
-            else
-            {
-                UpdateMana(recharge * Time.deltaTime);
-            }
+            UpdateMana(recharge * Time.deltaTime);
         }
     }
 
@@ -103,6 +116,13 @@ public class Char : MonoBehaviour
         {
             dash = true;
             lastDash = Time.time;
+        }
+    }
+    public void Shoot(Projectile projectile)
+    {
+        if (UpdateMana(-projectile.cost))
+        {
+            Instantiate(projectile, projectileSpawnPoint.position, projectileSpawnPoint.rotation).player = true;
         }
     }
 
@@ -135,7 +155,23 @@ public class Char : MonoBehaviour
             }
         }
         mana += amount;
+        if (mana > manaMax)
+        {
+            mana = manaMax;
+        }
         gameUI.UpdateMana(mana, manaMax);
         return true;
+    }
+
+    public void UpdateHealth(float amount)
+    {
+        health += amount;
+        if (amount < 0)
+        {
+            if (health < 0)
+            {
+                Game.Instance.GameOver();
+            }
+        }
     }
 }
