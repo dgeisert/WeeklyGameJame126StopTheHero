@@ -93,6 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 158c0261fb8ad4d429b475db250eca2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textName: Swipe
   visualObject: {fileID: 0}
   player: 0
   spinX: 0
@@ -103,6 +104,7 @@ MonoBehaviour:
   lifetime: 0.1
   damage: 5
   cost: 1
+  pickup: {fileID: 3948893122576019156, guid: 4a15782d8d038420b8ead1f8a5c5def9, type: 3}
   deathParticles: {fileID: 0}
 --- !u!64 &2505864274041198864
 MeshCollider:

@@ -8,10 +8,12 @@ public class Char : MonoBehaviour
     public InGameUI gameUI;
     public float speed;
     public float health = 5;
+    public Scarf healthScarf;
     int layerMask = 1 << 8;
 
     public float mana;
     public float manaMax;
+    public Scarf manaScarf;
     public float recharge;
     public float waitRecharge;
     float lastManaSpend;
@@ -22,18 +24,26 @@ public class Char : MonoBehaviour
 
     public Projectile altProjectile;
 
-    bool dash = false;
+    public bool dash = false;
     public float dashCost;
     public float dashCooldown;
     public float dashDuration;
     public float dashSpeed;
     float lastDash;
     bool canRecharge;
+
+    WeaponPickup activePickup;
+
+    void Awake()
+    {
+        Instance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
-        Instance = this;
         gameUI.UpdateMana(mana, manaMax);
+        UpdateHealth(0);
+        UpdateMana(0);
     }
 
     // Update is called once per frame
@@ -65,13 +75,13 @@ public class Char : MonoBehaviour
         Look();
 
         //Other player controls
-        if (Controls.PickUpDrop)
+        if (Controls.PickUpDropPrimary)
         {
-            PickUpDrop();
+            PickUpDrop(true);
         }
-        if (Controls.Interact)
+        if (Controls.PickUpDropAlt)
         {
-            Interact();
+            PickUpDrop(false);
         }
         if (Controls.Dash && lastDash + dashDuration + dashCooldown < Time.time)
         {
@@ -102,13 +112,22 @@ public class Char : MonoBehaviour
         transform.position += dir * Time.unscaledDeltaTime * speed * (dash ? dashSpeed : 1);
     }
 
-    public void PickUpDrop()
+    public void PickUpDrop(bool primary)
     {
-
-    }
-    public void Interact()
-    {
-
+        if (activePickup)
+        {
+            Instantiate((primary ? primaryProjectile : altProjectile).pickup.gameObject, transform.position, Quaternion.identity);
+            if (primary)
+            {
+                primaryProjectile = activePickup.weapon;
+            }
+            else
+            {
+                altProjectile = activePickup.weapon;
+            }
+            Destroy(activePickup.gameObject);
+            activePickup = null;
+        }
     }
     public void Dash()
     {
@@ -149,7 +168,7 @@ public class Char : MonoBehaviour
         if (amount < 0)
         {
             lastManaSpend = Time.time;
-            if (mana - amount < 0)
+            if (mana + amount < 0)
             {
                 return false;
             }
@@ -159,7 +178,7 @@ public class Char : MonoBehaviour
         {
             mana = manaMax;
         }
-        gameUI.UpdateMana(mana, manaMax);
+        manaScarf.SetLength(mana / 20);
         return true;
     }
 
@@ -171,6 +190,25 @@ public class Char : MonoBehaviour
             if (health < 0)
             {
                 Game.Instance.GameOver();
+            }
+        }
+        healthScarf.SetLength(health);
+    }
+
+    public void OnTriggerEnter(Collider collider)
+    {
+        if (collider.tag == "Pickup")
+        {
+            activePickup = collider.GetComponent<WeaponPickup>();
+        }
+    }
+    public void OnTriggerExit(Collider collider)
+    {
+        if (collider.tag == "Pickup")
+        {
+            if (activePickup == collider.GetComponent<WeaponPickup>())
+            {
+                activePickup = null;
             }
         }
     }

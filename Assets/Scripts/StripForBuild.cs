@@ -11,7 +11,11 @@ public class StripForBuild : MonoBehaviour
         get
         {
 #if UNITY_EDITOR
-            return Instance.strip;
+            if (Instance)
+            {
+                return Instance.strip;
+            }
+            return false;
 #else
             return false;
 #endif

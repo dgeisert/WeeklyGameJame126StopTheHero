@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class Scarf : MonoBehaviour
 {
-    public List<Transform> mods = new List<Transform>();
+    public List<Vector3> mods = new List<Vector3>();
     public List<Vector3> points = new List<Vector3>();
+    public float length;
     LineRenderer lineRenderer;
     // Start is called before the first frame update
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        mods.Add(transform);
-        Transform t = transform;
-        while (t.childCount > 0)
+        for (int i = 0; i < lineRenderer.positionCount; i++)
         {
-            mods.Add(t.GetChild(0));
-            t = t.GetChild(0);
+            mods.Add(lineRenderer.GetPosition(i) * 2);
         }
+        lineRenderer.positionCount = 0;
     }
 
     // Update is called once per frame
@@ -29,13 +28,18 @@ public class Scarf : MonoBehaviour
             return;
         }
         points.Remove(points[0]);
-        lineRenderer.positionCount = points.Count;
-        for (int i = 0; i < points.Count; i++)
+        lineRenderer.positionCount = Mathf.FloorToInt(length) + 1;
+        for (int i = 0; i < Mathf.FloorToInt(length) + 1; i++)
         {
-            lineRenderer.SetPosition(i, transform.position + 
-            (mods[i].transform.position - transform.position) + 
-            (points[points.Count - 1 - i] - transform.position) + 
-            (Vector3.one * Mathf.Sin(Time.time * 2 + i)) / 15);
+            lineRenderer.SetPosition(i, transform.position +
+                (mods[i] - Vector3.up * 1.5f) +
+                (points[points.Count - 1 - i] - transform.position) +
+                (Vector3.one * Mathf.Sin(-Time.time * 2 + i)) / 15);
         }
+    }
+
+    public void SetLength(float setLength)
+    {
+        length = setLength;
     }
 }

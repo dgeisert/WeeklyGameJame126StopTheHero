@@ -128,7 +128,8 @@ public class MeshDivider : MonoBehaviour
 
         if (col != null)
         {
-            col.size = scale;
+            col.size = scale + Vector3.forward;
+            col.center += Vector3.forward * 0.2f;
         }
     }
 }

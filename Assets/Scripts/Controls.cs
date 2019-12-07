@@ -37,13 +37,6 @@ public class Controls : MonoBehaviour
                 Input.GetKey(KeyCode.DownArrow);
         }
     }
-    public static bool Interact
-    {
-        get
-        {
-            return Input.GetKeyDown(KeyCode.E);
-        }
-    }
     public static bool Dash
     {
         get
@@ -58,18 +51,25 @@ public class Controls : MonoBehaviour
             return Input.GetMouseButtonDown(0);
         }
     }
-    public static bool PickUpDrop
+    public static bool AltShoot
+    {
+        get
+        {
+            return Input.GetMouseButtonDown(1);
+        }
+    }
+    public static bool PickUpDropPrimary
     {
         get
         {
             return Input.GetKeyDown(KeyCode.Q);
         }
     }
-    public static bool AltShoot
+    public static bool PickUpDropAlt
     {
         get
         {
-            return Input.GetMouseButtonDown(1);
+            return Input.GetKeyDown(KeyCode.E);
         }
     }
     public static bool Pause

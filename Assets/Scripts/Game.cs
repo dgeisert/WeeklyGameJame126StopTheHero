@@ -36,6 +36,7 @@ public class Game : MonoBehaviour
         pauseMenu.gameObject.SetActive(false);
         scoreScreen.gameObject.SetActive(false);
         inGameUI.gameObject.SetActive(true);
+        Time.timeScale = 1;
         Score = 0;
     }
 

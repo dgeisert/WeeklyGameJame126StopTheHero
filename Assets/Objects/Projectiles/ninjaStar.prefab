@@ -107,6 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 158c0261fb8ad4d429b475db250eca2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textName: Ninja Star
   visualObject: {fileID: 7308210091230077008}
   player: 0
   spinX: 0
@@ -117,6 +118,7 @@ MonoBehaviour:
   lifetime: -1
   damage: 1
   cost: 2
+  pickup: {fileID: 7491911514813035609, guid: fce42dadf66824573a0bb3ff34a62dfe, type: 3}
   deathParticles: {fileID: 0}
 --- !u!54 &2043082736414684967
 Rigidbody:

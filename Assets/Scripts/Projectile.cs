@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public string textName;
     public Transform visualObject;
     public bool player = false;
     public bool spinX, spinY, spinZ;
@@ -12,6 +13,7 @@ public class Projectile : MonoBehaviour
     public float lifetime = -1;
     public float damage = 1;
     public float cost;
+    public WeaponPickup pickup;
     float spawnTime;
     public GameObject deathParticles;
     // Start is called before the first frame update
@@ -57,7 +59,7 @@ public class Projectile : MonoBehaviour
                 DestroyProjectile();
                 break;
             case "Player":
-                if (!player)
+                if (!player && !Char.Instance.dash)
                 {
                     Char.Instance.UpdateHealth(-damage);
                     DestroyProjectile();
