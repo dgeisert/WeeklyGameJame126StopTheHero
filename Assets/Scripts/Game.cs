@@ -44,10 +44,6 @@ public class Game : MonoBehaviour
     {
         if (active)
         {
-            if (Controls.Next)
-            {
-                Next();
-            }
             if (Controls.Pause)
             {
                 Pause();
