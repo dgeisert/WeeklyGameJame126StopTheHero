@@ -5,6 +5,8 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float health;
+    public Scarf healthScarf;
+    float hitTime;
     public Projectile attack;
     public float range;
     public float attackCooldown;
@@ -18,17 +20,19 @@ public class Enemy : MonoBehaviour
     float wanderTime;
     float wanderDir;
     Transform target;
+    public AudioClip alertAudio;
+    public AudioClip ouchAudio;
+    AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
-        if (attack.lifetime > 0)
-        {
-            range = Mathf.Min(range, attack.lifetime * attack.speed - 0.5f);
-        }
+        audioSource = GetComponent<AudioSource>();
+        transform.eulerAngles = Vector3.up * Random.value * 360;
         if (patrolPath.Count > 0)
         {
             target = patrolPath[patrolPoint];
         }
+        Game.Instance.enemies.Add(this);
     }
 
     // Update is called once per frame
@@ -82,6 +86,7 @@ public class Enemy : MonoBehaviour
                 transform.localEulerAngles += new Vector3(0, wanderDir * Time.deltaTime * 200, 0);
             }
         }
+        Knockback();
     }
 
     void Face()
@@ -106,6 +111,9 @@ public class Enemy : MonoBehaviour
         health += amount;
         if (amount < 0)
         {
+            hitTime = Time.time;
+            audioSource.clip = ouchAudio;
+            audioSource.Play();
             if (!triggered)
             {
                 health += amount;
@@ -114,7 +122,23 @@ public class Enemy : MonoBehaviour
             {
                 Die();
             }
+            else if (!triggered)
+            {
+                Shout();
+            }
             triggered = true;
+        }
+        if (healthScarf != null)
+        {
+            healthScarf.SetLength(health);
+        }
+    }
+
+    public void Knockback()
+    {
+        if (hitTime + 0.1f > Time.time && speed > 0)
+        {
+            transform.position -= transform.forward * Time.deltaTime * 4;
         }
     }
 
@@ -124,6 +148,20 @@ public class Enemy : MonoBehaviour
         {
             Instantiate(deathParticles, transform.position, transform.rotation);
         }
+        Game.Instance.enemies.Remove(this);
         Destroy(gameObject);
+    }
+
+    public void Shout()
+    {
+        foreach (Enemy e in Game.Instance.enemies)
+        {
+            if (e != null && Vector3.Distance(e.transform.position, transform.position) < 6)
+            {
+                e.triggered = true;
+            }
+        }
+        audioSource.clip = alertAudio;
+        audioSource.Play();
     }
 }

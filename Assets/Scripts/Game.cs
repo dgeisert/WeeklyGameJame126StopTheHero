@@ -8,6 +8,7 @@ public class Game : MonoBehaviour
     public PauseMenu pauseMenu;
     public ScoreScreen scoreScreen;
     public InGameUI inGameUI;
+    public List<Enemy> enemies;
     public bool active = true;
     public static float Score
     {
@@ -30,9 +31,14 @@ public class Game : MonoBehaviour
     }
     public float score;
     // Start is called before the first frame update
-    void Start()
+
+    void Awake()
     {
         Instance = this;
+        enemies = new List<Enemy>();
+    }
+    void Start()
+    {
         pauseMenu.gameObject.SetActive(false);
         scoreScreen.gameObject.SetActive(false);
         inGameUI.gameObject.SetActive(true);

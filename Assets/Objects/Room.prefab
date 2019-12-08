@@ -67,6 +67,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomEdges:
   - {fileID: 3958201561120116485, guid: fb233b12524704392a3550ee3fb399d3, type: 3}
-  edgeCount: 1
+  - {fileID: 2336981939208459403, guid: eae5481fa21ce45caa3702636711f45e, type: 3}
+  - {fileID: 9088201864389376312, guid: 014bac3f13d3548de9a1a7ac214dad57, type: 3}
+  edgeCount: 3
   roomCenter: []
   centerCount: 0

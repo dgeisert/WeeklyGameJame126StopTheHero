@@ -7,9 +7,13 @@ public class SightArea : MonoBehaviour
     public Enemy enemy;
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.tag == "Player")
+        if (!enemy.triggered)
         {
-            enemy.triggered = true;
+            if (collider.tag == "Player")
+            {
+                enemy.Shout();
+                enemy.triggered = true;
+            }
         }
     }
 }

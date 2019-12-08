@@ -34,9 +34,19 @@ public class RoomCreator : MonoBehaviour
         {
             CreateRoom();
         }
-        else if (transform.childCount == 0)
+        else
         {
-            CreateRoom();
+            if (transform.childCount == 0)
+            {
+                CreateRoom();
+            }
+            else
+            {
+                if (!transform.GetChild(transform.childCount - 1).name.Contains("Clone"))
+                {
+                    CreateRoom();
+                }
+            }
         }
     }
 
@@ -143,7 +153,8 @@ public class RoomCreator : MonoBehaviour
     void CreateBottomWall(float length, Vector3 pos)
     {
         GameObject newWall = Instantiate(bottomWall, transform.position, Quaternion.identity, transform);
-        newWall.GetComponent<BoxCollider>().size = new Vector3(length, walls.newScale.y, walls.newScale.z);
+        newWall.GetComponent<BoxCollider>().size = new Vector3(length, walls.newScale.y, walls.newScale.z + 1);
+        newWall.GetComponent<BoxCollider>().center -= Vector3.forward * 0.2f;
         newWall.transform.position = transform.position + Vector3.up * walls.newScale.y / 2 + pos;
     }
 }

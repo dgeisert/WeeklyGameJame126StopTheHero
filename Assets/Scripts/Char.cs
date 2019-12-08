@@ -5,7 +5,7 @@ using UnityEngine;
 public class Char : MonoBehaviour
 {
     public static Char Instance;
-    public InGameUI gameUI;
+    public CameraFollow cam;
     public float speed;
     public float health = 5;
     public Scarf healthScarf;
@@ -31,6 +31,9 @@ public class Char : MonoBehaviour
     public float dashSpeed;
     float lastDash;
     bool canRecharge;
+    AudioSource audioSource;
+    public AudioClip dashAudio;
+    public AudioClip ouchAudio;
 
     WeaponPickup activePickup;
 
@@ -41,7 +44,7 @@ public class Char : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameUI.UpdateMana(mana, manaMax);
+        audioSource = GetComponent<AudioSource>();
         UpdateHealth(0);
         UpdateMana(0);
     }
@@ -133,6 +136,8 @@ public class Char : MonoBehaviour
     {
         if (UpdateMana(-dashCost))
         {
+            audioSource.clip = dashAudio;
+            audioSource.Play();
             dash = true;
             lastDash = Time.time;
         }
@@ -187,6 +192,9 @@ public class Char : MonoBehaviour
         health += amount;
         if (amount < 0)
         {
+            audioSource.clip = ouchAudio;
+            audioSource.Play();
+            cam.Shake();
             if (health < 0)
             {
                 Game.Instance.GameOver();
