@@ -89,19 +89,19 @@ public class RoomCreator : MonoBehaviour
         }
         if (down.y == 0)
         {
-            CreateBottomWall(size.x, -Vector3.forward * size.y / 2);
+            CreateWall(size.x, -Vector3.forward * size.y / 2, 180);
         }
         else if (down.x == 0 || down.x + down.y == size.x)
         {
             if (down.y != size.x)
             {
-                CreateBottomWall(size.x - down.y, (down.x == 0 ? 1 : -1) * Vector3.right * down.y / 2 - Vector3.forward * size.y / 2);
+                CreateWall(size.x - down.y, (down.x == 0 ? 1 : -1) * Vector3.right * down.y / 2 - Vector3.forward * size.y / 2, 180);
             }
         }
         else
         {
-            CreateBottomWall(down.x, -Vector3.right * (size.x / 2 - down.x / 2) - Vector3.forward * size.y / 2);
-            CreateBottomWall(size.x - down.x - down.y, -Vector3.right * (size.x / 2 - (down.x + down.y) - (size.x - down.x - down.y) / 2) - Vector3.forward * size.y / 2);
+            CreateWall(down.x, -Vector3.right * (size.x / 2 - down.x / 2) - Vector3.forward * size.y / 2, 180);
+            CreateWall(size.x - down.x - down.y, -Vector3.right * (size.x / 2 - (down.x + down.y) - (size.x - down.x - down.y) / 2) - Vector3.forward * size.y / 2, 180);
         }
         if (right.y == 0)
         {
@@ -150,11 +150,11 @@ public class RoomCreator : MonoBehaviour
         newWall.transform.position = transform.position + Vector3.up * walls.newScale.y / 2 + pos;
     }
 
-    void CreateBottomWall(float length, Vector3 pos)
+    void CreateBottomWall(float length, Vector3 pos, float rot)
     {
         GameObject newWall = Instantiate(bottomWall, transform.position, Quaternion.identity, transform);
         newWall.GetComponent<BoxCollider>().size = new Vector3(length, walls.newScale.y, walls.newScale.z + 1);
-        newWall.GetComponent<BoxCollider>().center -= Vector3.forward * 0.2f;
+        newWall.GetComponent<BoxCollider>().center -= Vector3.forward * 0.4f;
         newWall.transform.position = transform.position + Vector3.up * walls.newScale.y / 2 + pos;
     }
 }

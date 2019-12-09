@@ -8,9 +8,9 @@ public class PlaceObject : MonoBehaviour
     public float offWall = 0;
     public void Setup(Vector3 pos, float wallHeight)
     {
-        if (exactY > 0)
+        if (exactY >= 0)
         {
-            transform.localPosition = new Vector3(pos.x, exactY - wallHeight / 2, pos.z - offWall + Random.value / 100);
+            transform.localPosition = new Vector3(pos.x, exactY - wallHeight / 2 + Random.value / 100, pos.z - offWall + Random.value / 100);
         }
         else
         {

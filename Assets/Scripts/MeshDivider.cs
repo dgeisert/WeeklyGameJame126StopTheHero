@@ -120,6 +120,139 @@ public class MeshDivider : MonoBehaviour
                 }
             }
         }
+
+        //put black backing on wall
+        newVertices2.Add(new Vector3(
+            (scale.x / 2) - 1, (scale.y / 2), 0.5f
+        ));
+        newTriangles.Add(newVertices2.Count - 1);
+        newVertices2.Add(new Vector3(
+            (scale.x / 2), (scale.y / 2), 0
+        ));
+        newTriangles.Add(newVertices2.Count - 1);
+        newVertices2.Add(new Vector3(
+            -(scale.x / 2) + 1, (scale.y / 2), 0.5f
+        ));
+        newTriangles.Add(newVertices2.Count - 1);
+        newColors.Add(Color.black);
+        newColors.Add(Color.black);
+        newColors.Add(Color.black);
+
+        newVertices2.Add(new Vector3(
+            (scale.x / 2), (scale.y / 2), 0
+        ));
+        newTriangles.Add(newVertices2.Count - 1);
+        newVertices2.Add(new Vector3(
+            -(scale.x / 2), (scale.y / 2), 0
+        ));
+        newTriangles.Add(newVertices2.Count - 1);
+        newVertices2.Add(new Vector3(
+            -(scale.x / 2) + 1, (scale.y / 2), 0.5f
+        ));
+        newTriangles.Add(newVertices2.Count - 1);
+        newColors.Add(Color.black);
+        newColors.Add(Color.black);
+        newColors.Add(Color.black);
+
+        newVertices2.Add(new Vector3(
+            (scale.x / 2) - 1, -(scale.y / 2), 0.5f
+        ));
+        newTriangles.Add(newVertices2.Count - 1);
+        newVertices2.Add(new Vector3(
+            (scale.x / 2) - 1, (scale.y / 2), 0.5f
+        ));
+        newTriangles.Add(newVertices2.Count - 1);
+        newVertices2.Add(new Vector3(
+            -(scale.x / 2) + 1, -(scale.y / 2), 0.5f
+        ));
+        newTriangles.Add(newVertices2.Count - 1);
+        newColors.Add(Color.black);
+        newColors.Add(Color.black);
+        newColors.Add(Color.black);
+
+        newVertices2.Add(new Vector3(
+            (scale.x / 2) - 1, (scale.y / 2), 0.5f
+        ));
+        newTriangles.Add(newVertices2.Count - 1);
+        newVertices2.Add(new Vector3(
+            -(scale.x / 2) + 1, (scale.y / 2), 0.5f
+        ));
+        newTriangles.Add(newVertices2.Count - 1);
+        newVertices2.Add(new Vector3(
+            -(scale.x / 2) + 1, -(scale.y / 2), 0.5f
+        ));
+        newTriangles.Add(newVertices2.Count - 1);
+        newColors.Add(Color.black);
+        newColors.Add(Color.black);
+        newColors.Add(Color.black);
+
+        
+        newVertices2.Add(new Vector3(
+            (scale.x / 2), (scale.y / 2), 0f
+        ));
+        newTriangles.Add(newVertices2.Count - 1);
+        newVertices2.Add(new Vector3(
+            (scale.x / 2) - 1, (scale.y / 2), 0.5f
+        ));
+        newTriangles.Add(newVertices2.Count - 1);
+        newVertices2.Add(new Vector3(
+            (scale.x / 2) - 1, -(scale.y / 2), 0.5f
+        ));
+        newTriangles.Add(newVertices2.Count - 1);
+        newColors.Add(Color.black);
+        newColors.Add(Color.black);
+        newColors.Add(Color.black);
+
+        newVertices2.Add(new Vector3(
+            (scale.x / 2), -(scale.y / 2), 0
+        ));
+        newTriangles.Add(newVertices2.Count - 1);
+        newVertices2.Add(new Vector3(
+            (scale.x / 2), (scale.y / 2), 0
+        ));
+        newTriangles.Add(newVertices2.Count - 1);
+        newVertices2.Add(new Vector3(
+            (scale.x / 2) - 1, -(scale.y / 2), 0.5f
+        ));
+        newTriangles.Add(newVertices2.Count - 1);
+        newColors.Add(Color.black);
+        newColors.Add(Color.black);
+        newColors.Add(Color.black);
+
+
+        newVertices2.Add(new Vector3(
+            -(scale.x / 2) + 1, (scale.y / 2), 0.5f
+        ));
+        newTriangles.Add(newVertices2.Count - 1);
+        newVertices2.Add(new Vector3(
+            -(scale.x / 2), (scale.y / 2), 0f
+        ));
+        newTriangles.Add(newVertices2.Count - 1);
+        newVertices2.Add(new Vector3(
+            -(scale.x / 2) + 1, -(scale.y / 2), 0.5f
+        ));
+        newTriangles.Add(newVertices2.Count - 1);
+        newColors.Add(Color.black);
+        newColors.Add(Color.black);
+        newColors.Add(Color.black);
+
+        newVertices2.Add(new Vector3(
+            -(scale.x / 2), (scale.y / 2), 0
+        ));
+        newTriangles.Add(newVertices2.Count - 1);
+        newVertices2.Add(new Vector3(
+            -(scale.x / 2), -(scale.y / 2), 0
+        ));
+        newTriangles.Add(newVertices2.Count - 1);
+        newVertices2.Add(new Vector3(
+            -(scale.x / 2) + 1, -(scale.y / 2), 0.5f
+        ));
+        newTriangles.Add(newVertices2.Count - 1);
+        newColors.Add(Color.black);
+        newColors.Add(Color.black);
+        newColors.Add(Color.black);
+
+
         mesh.Clear();
         mesh.vertices = newVertices2.ToArray();
         mesh.triangles = newTriangles.ToArray();

@@ -14,6 +14,7 @@ public class Menu : MonoBehaviour
     public Image NoSound;
     void Start()
     {
+        Time.timeScale = 1;
         OpenMenu();
     }
     public void PlayGame()

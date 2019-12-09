@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public bool stutterStep;
     public float health;
     public Scarf healthScarf;
     float hitTime;
@@ -15,6 +16,8 @@ public class Enemy : MonoBehaviour
     public float speed;
     public GameObject deathParticles;
     public bool triggered;
+    public bool chasing;
+    float lastChasingCheck;
     public List<Transform> patrolPath;
     int patrolPoint;
     float wanderTime;
@@ -38,7 +41,25 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (triggered)
+        if (chasing)
+        {
+            target = Char.Instance.transform;
+            Face();
+            Move();
+            if (lastChasingCheck + 1 < Time.time)
+            {
+                RaycastHit hit;
+                Physics.Raycast(transform.position + 0.5f * Vector3.up,
+                    (Char.Instance.transform.position - transform.position),
+                    out hit);
+                if (hit.collider.tag != "Wall")
+                {
+                    triggered = true;
+                    chasing = false;
+                }
+            }
+        }
+        else if (triggered)
         {
             target = Char.Instance.transform;
             if (Vector3.Distance(transform.position, target.position) <= range)
@@ -46,7 +67,23 @@ public class Enemy : MonoBehaviour
                 Face();
                 if (lastAttack + attackCooldown < Time.time)
                 {
-                    Attack();
+                    RaycastHit hit;
+                    Physics.Raycast(transform.position,
+                        (Char.Instance.transform.position - transform.position),
+                        out hit);
+                    if (hit.collider.tag != "Wall")
+                    {
+                        Attack();
+                    }
+                    else
+                    {
+                        triggered = false;
+                        chasing = true;
+                    }
+                }
+                else if (stutterStep && lastAttack + (attackCooldown * 3 / 4) > Time.time && lastAttack + (attackCooldown * 1 / 4) < Time.time)
+                {
+                    Move();
                 }
             }
             else
@@ -102,7 +139,7 @@ public class Enemy : MonoBehaviour
 
     void Attack()
     {
-        Instantiate(attack, attackSpawnLoc.position, attackSpawnLoc.rotation);
+        Instantiate(attack, attackSpawnLoc.position, attackSpawnLoc.rotation).speed /= 2;
         lastAttack = Time.time;
     }
 
@@ -163,5 +200,11 @@ public class Enemy : MonoBehaviour
         }
         audioSource.clip = alertAudio;
         audioSource.Play();
+    }
+
+    public void Trigger()
+    {
+        triggered = true;
+        chasing = false;
     }
 }

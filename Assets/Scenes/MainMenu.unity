@@ -4571,7 +4571,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 0
   m_canvasRenderer: {fileID: 1537002673}
   m_TextComponent: {fileID: 1129521588}
   m_materialReferenceIndex: 1
@@ -5092,7 +5092,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: REPLACE THE HERO
+  m_text: STOP THE HERO
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d15f46240d1af406ca5b51abb9f04dbd, type: 2}
   m_sharedMaterial: {fileID: 5224294873423597109, guid: d15f46240d1af406ca5b51abb9f04dbd,
@@ -5162,7 +5162,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1832488605}
-    characterCount: 16
+    characterCount: 13
     spriteCount: 0
     spaceCount: 2
     wordCount: 3

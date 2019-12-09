@@ -11,8 +11,16 @@ public class SightArea : MonoBehaviour
         {
             if (collider.tag == "Player")
             {
-                enemy.Shout();
-                enemy.triggered = true;
+                RaycastHit hit;
+                Physics.Raycast(enemy.transform.position,
+                    (collider.transform.position - enemy.transform.position),
+                    out hit);
+                if (hit.collider.tag == "Player")
+                {
+                    enemy.Shout();
+                    enemy.Trigger();
+                }
+                Debug.Log(hit.collider.name + ", " + collider.tag);
             }
         }
     }

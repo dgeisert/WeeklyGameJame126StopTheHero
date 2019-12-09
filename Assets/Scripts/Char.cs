@@ -7,7 +7,10 @@ public class Char : MonoBehaviour
     public static Char Instance;
     public CameraFollow cam;
     public float speed;
+    Vector3 mov;
     public float health = 5;
+    public float invicibleAfterHit = 0.2f;
+    float lastHit;
     public Scarf healthScarf;
     int layerMask = 1 << 8;
 
@@ -57,22 +60,24 @@ public class Char : MonoBehaviour
             return;
         }
         //Player movement
+        mov = Vector3.zero;
         if (Controls.Forward && !Controls.Back)
         {
-            Move(Vector3.forward);
+            mov += Vector3.forward;
         }
         else if (Controls.Back && !Controls.Forward)
         {
-            Move(-Vector3.forward);
+            mov -= Vector3.forward;
         }
         if (Controls.Right && !Controls.Left)
         {
-            Move(Vector3.right);
+            mov += Vector3.right;
         }
         else if (Controls.Left && !Controls.Right)
         {
-            Move(-Vector3.right);
+            mov -= Vector3.right;
         }
+        Move(mov.normalized);
 
         // Player Rotation
         Look();
@@ -189,9 +194,14 @@ public class Char : MonoBehaviour
 
     public void UpdateHealth(float amount)
     {
+        if (amount < 0 && lastHit + invicibleAfterHit > Time.time)
+        {
+            return;
+        }
         health += amount;
         if (amount < 0)
         {
+            lastHit = Time.time;
             audioSource.clip = ouchAudio;
             audioSource.Play();
             cam.Shake();
