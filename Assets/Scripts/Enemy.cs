@@ -139,7 +139,9 @@ public class Enemy : MonoBehaviour
 
     void Attack()
     {
-        Instantiate(attack, attackSpawnLoc.position, attackSpawnLoc.rotation).speed /= 2;
+        Projectile proj = Instantiate(attack, attackSpawnLoc.position, attackSpawnLoc.rotation);
+        proj.speed /= 2;
+        proj.damage = 1;
         lastAttack = Time.time;
     }
 
