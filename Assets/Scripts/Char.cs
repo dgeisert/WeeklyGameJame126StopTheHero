@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Char : MonoBehaviour
 {
@@ -50,6 +51,31 @@ public class Char : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         UpdateHealth(0);
         UpdateMana(0);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        Setup();
+    }
+
+    void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+    {
+        Setup();
+    }
+
+    void Setup()
+    {
+        Time.timeScale = 1;
+        Game.Instance.active = true;
+        transform.position = Vector3.zero;
+        cam = Camera.main.GetComponent<CameraFollow>();
+        if (cam != null)
+        {
+            cam.target = transform;
+            cam.Setup();
+        }
     }
 
     // Update is called once per frame
@@ -204,7 +230,10 @@ public class Char : MonoBehaviour
             lastHit = Time.time;
             audioSource.clip = ouchAudio;
             audioSource.Play();
-            cam.Shake();
+            if (cam != null)
+            {
+                cam.Shake();
+            }
             if (health < 0)
             {
                 Game.Instance.GameOver();

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2336981939208459403}
   - component: {fileID: 6605060181377649392}
   - component: {fileID: 3650666176421707033}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: barrel
   m_TagString: Destructible
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 4517762918478153904}
   - component: {fileID: 7278403522669069172}
   - component: {fileID: 6391088638655836655}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

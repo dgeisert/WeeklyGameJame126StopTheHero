@@ -20,7 +20,6 @@ public class SightArea : MonoBehaviour
                     enemy.Shout();
                     enemy.Trigger();
                 }
-                Debug.Log(hit.collider.name + ", " + collider.tag);
             }
         }
     }

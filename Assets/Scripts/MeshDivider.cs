@@ -19,11 +19,15 @@ public class MeshDivider : MonoBehaviour
     public List<PlaceObject> interestingObjects;
     public float objectDensity = 0.05f;
     public float interestingObjectDensity = 0.05f;
+    public bool randomize = true;
 
     void Start()
     {
         col = GetComponent<BoxCollider>();
-        newSeed = Mathf.FloorToInt(Random.value * 10000);
+        if (randomize)
+        {
+            newSeed = Mathf.FloorToInt(Random.value * 10000);
+        }
         seed = newSeed;
         scale = newScale;
         mesh = new Mesh();
@@ -130,9 +134,7 @@ public class MeshDivider : MonoBehaviour
             (scale.x / 2), (scale.y / 2), 0
         ));
         newTriangles.Add(newVertices2.Count - 1);
-        newVertices2.Add(new Vector3(
-            -(scale.x / 2) + 1, (scale.y / 2), 0.5f
-        ));
+        newVertices2.Add(new Vector3(-(scale.x / 2) + 1, (scale.y / 2), 0.5f));
         newTriangles.Add(newVertices2.Count - 1);
         newColors.Add(Color.black);
         newColors.Add(Color.black);
@@ -142,13 +144,9 @@ public class MeshDivider : MonoBehaviour
             (scale.x / 2), (scale.y / 2), 0
         ));
         newTriangles.Add(newVertices2.Count - 1);
-        newVertices2.Add(new Vector3(
-            -(scale.x / 2), (scale.y / 2), 0
-        ));
+        newVertices2.Add(new Vector3(-(scale.x / 2), (scale.y / 2), 0));
         newTriangles.Add(newVertices2.Count - 1);
-        newVertices2.Add(new Vector3(
-            -(scale.x / 2) + 1, (scale.y / 2), 0.5f
-        ));
+        newVertices2.Add(new Vector3(-(scale.x / 2) + 1, (scale.y / 2), 0.5f));
         newTriangles.Add(newVertices2.Count - 1);
         newColors.Add(Color.black);
         newColors.Add(Color.black);
@@ -162,9 +160,7 @@ public class MeshDivider : MonoBehaviour
             (scale.x / 2) - 1, (scale.y / 2), 0.5f
         ));
         newTriangles.Add(newVertices2.Count - 1);
-        newVertices2.Add(new Vector3(
-            -(scale.x / 2) + 1, -(scale.y / 2), 0.5f
-        ));
+        newVertices2.Add(new Vector3(-(scale.x / 2) + 1, -(scale.y / 2), 0.5f));
         newTriangles.Add(newVertices2.Count - 1);
         newColors.Add(Color.black);
         newColors.Add(Color.black);
@@ -174,19 +170,14 @@ public class MeshDivider : MonoBehaviour
             (scale.x / 2) - 1, (scale.y / 2), 0.5f
         ));
         newTriangles.Add(newVertices2.Count - 1);
-        newVertices2.Add(new Vector3(
-            -(scale.x / 2) + 1, (scale.y / 2), 0.5f
-        ));
+        newVertices2.Add(new Vector3(-(scale.x / 2) + 1, (scale.y / 2), 0.5f));
         newTriangles.Add(newVertices2.Count - 1);
-        newVertices2.Add(new Vector3(
-            -(scale.x / 2) + 1, -(scale.y / 2), 0.5f
-        ));
+        newVertices2.Add(new Vector3(-(scale.x / 2) + 1, -(scale.y / 2), 0.5f));
         newTriangles.Add(newVertices2.Count - 1);
         newColors.Add(Color.black);
         newColors.Add(Color.black);
         newColors.Add(Color.black);
 
-        
         newVertices2.Add(new Vector3(
             (scale.x / 2), (scale.y / 2), 0f
         ));
@@ -219,39 +210,25 @@ public class MeshDivider : MonoBehaviour
         newColors.Add(Color.black);
         newColors.Add(Color.black);
 
-
-        newVertices2.Add(new Vector3(
-            -(scale.x / 2) + 1, (scale.y / 2), 0.5f
-        ));
+        newVertices2.Add(new Vector3(-(scale.x / 2) + 1, (scale.y / 2), 0.5f));
         newTriangles.Add(newVertices2.Count - 1);
-        newVertices2.Add(new Vector3(
-            -(scale.x / 2), (scale.y / 2), 0f
-        ));
+        newVertices2.Add(new Vector3(-(scale.x / 2), (scale.y / 2), 0f));
         newTriangles.Add(newVertices2.Count - 1);
-        newVertices2.Add(new Vector3(
-            -(scale.x / 2) + 1, -(scale.y / 2), 0.5f
-        ));
+        newVertices2.Add(new Vector3(-(scale.x / 2) + 1, -(scale.y / 2), 0.5f));
         newTriangles.Add(newVertices2.Count - 1);
         newColors.Add(Color.black);
         newColors.Add(Color.black);
         newColors.Add(Color.black);
 
-        newVertices2.Add(new Vector3(
-            -(scale.x / 2), (scale.y / 2), 0
-        ));
+        newVertices2.Add(new Vector3(-(scale.x / 2), (scale.y / 2), 0));
         newTriangles.Add(newVertices2.Count - 1);
-        newVertices2.Add(new Vector3(
-            -(scale.x / 2), -(scale.y / 2), 0
-        ));
+        newVertices2.Add(new Vector3(-(scale.x / 2), -(scale.y / 2), 0));
         newTriangles.Add(newVertices2.Count - 1);
-        newVertices2.Add(new Vector3(
-            -(scale.x / 2) + 1, -(scale.y / 2), 0.5f
-        ));
+        newVertices2.Add(new Vector3(-(scale.x / 2) + 1, -(scale.y / 2), 0.5f));
         newTriangles.Add(newVertices2.Count - 1);
         newColors.Add(Color.black);
         newColors.Add(Color.black);
         newColors.Add(Color.black);
-
 
         mesh.Clear();
         mesh.vertices = newVertices2.ToArray();
@@ -262,7 +239,7 @@ public class MeshDivider : MonoBehaviour
         if (col != null)
         {
             col.size = scale + Vector3.forward;
-            col.center += Vector3.forward * 0.2f;
+            col.center = Vector3.forward * 0.35f;
         }
     }
 }

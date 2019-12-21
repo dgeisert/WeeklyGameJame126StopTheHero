@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour
     public AudioClip alertAudio;
     public AudioClip ouchAudio;
     AudioSource audioSource;
+    public Reward reward;
     // Start is called before the first frame update
     void Start()
     {
@@ -183,9 +184,14 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        InGameUI.Instance.Speach2();
         if (deathParticles != null)
         {
-            Instantiate(deathParticles, transform.position, transform.rotation);
+            Destroy(Instantiate(deathParticles, transform.position, transform.rotation), 2);
+        }
+        if (reward != null)
+        {
+            reward.Activate(transform.position);
         }
         Game.Instance.enemies.Remove(this);
         Destroy(gameObject);

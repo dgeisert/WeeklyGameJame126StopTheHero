@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public CameraFollow Instance;
+    public static CameraFollow Instance;
     public Transform target;
     public float smoothing = 1;
     Vector3 pos;
@@ -16,6 +16,9 @@ public class CameraFollow : MonoBehaviour
     void Start()
     {
         Instance = this;
+    }
+    public void Setup()
+    {
         pos = transform.position - target.position;
     }
 

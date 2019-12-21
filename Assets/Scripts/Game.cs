@@ -42,8 +42,12 @@ public class Game : MonoBehaviour
         pauseMenu.gameObject.SetActive(false);
         scoreScreen.gameObject.SetActive(false);
         inGameUI.gameObject.SetActive(true);
+        DontDestroyOnLoad(pauseMenu.gameObject);
+        DontDestroyOnLoad(scoreScreen.gameObject);
+        DontDestroyOnLoad(inGameUI.gameObject);
         Time.timeScale = 1;
         Score = 0;
+        SceneChanger.LoadLevel();
     }
 
     // Update is called once per frame

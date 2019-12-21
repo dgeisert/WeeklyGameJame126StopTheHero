@@ -179,8 +179,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4759139130504158633}
   m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: -0.01, y: 0, z: 2.86}
-  m_LocalScale: {x: 4, y: 2, z: 4}
+  m_LocalPosition: {x: 0.13, y: 0, z: 5.21}
+  m_LocalScale: {x: 8, y: 2, z: 8}
   m_Children: []
   m_Father: {fileID: 8765563403902829844}
   m_RootOrder: 1
@@ -285,8 +285,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5744022534898766034}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.00999999, y: 0, z: 6.02}
-  m_LocalScale: {x: 5, y: 2, z: 6}
+  m_LocalPosition: {x: 0, y: 0, z: 8.25}
+  m_LocalScale: {x: 11, y: 2, z: 6}
   m_Children: []
   m_Father: {fileID: 8765563403902829844}
   m_RootOrder: 2
@@ -541,12 +541,14 @@ MonoBehaviour:
   attackCooldown: 1
   attackSpawnLoc: {fileID: 8765563403103707416}
   speed: 3
-  deathParticles: {fileID: 0}
+  deathParticles: {fileID: 2694924781644866750, guid: 51cda7c33b09d4ad6972173b2e68f56c,
+    type: 3}
   triggered: 0
   chasing: 0
   patrolPath: []
   alertAudio: {fileID: 8300000, guid: b65a67459facd4e52afabfbc5b0e1016, type: 3}
   ouchAudio: {fileID: 8300000, guid: c106275cd3b33441796aa528b99bad11, type: 3}
+  reward: {fileID: 5995386856466797965, guid: 9c15baf5b7f924f68838888fd39a0589, type: 3}
 --- !u!54 &8765563403902829842
 Rigidbody:
   m_ObjectHideFlags: 0

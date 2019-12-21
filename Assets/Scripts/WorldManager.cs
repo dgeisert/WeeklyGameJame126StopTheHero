@@ -14,7 +14,7 @@ public class WorldManager : MonoBehaviour
             if (rc != null)
             {
                 rooms.Add(rc);
-                rc.gameObject.SetActive(Vector3.Distance(rc.transform.position, Char.Instance.transform.position) < 20);
+                rc.gameObject.SetActive(Vector3.Distance(rc.transform.position, Char.Instance.transform.position) < 30);
             }
         }
     }
@@ -28,7 +28,7 @@ public class WorldManager : MonoBehaviour
             frame = 0;
             foreach (RoomCreator rc in rooms)
             {
-                rc.gameObject.SetActive(Vector3.Distance(rc.transform.position, Char.Instance.transform.position) < 20);
+                rc.gameObject.SetActive(Vector3.Distance(rc.transform.position, Char.Instance.transform.position) < 30);
             }
         }
     }
